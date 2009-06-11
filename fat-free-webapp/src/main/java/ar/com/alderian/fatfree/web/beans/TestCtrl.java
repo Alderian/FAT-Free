@@ -7,7 +7,7 @@ package ar.com.alderian.fatfree.web.beans;
  * @author oalvarez
  * 
  */
-public class Testctrl {
+public class TestCtrl {
 
 	/**
 	 * @return
