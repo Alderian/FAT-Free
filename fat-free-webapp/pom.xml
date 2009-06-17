@@ -27,8 +27,8 @@
 				<configuration>
 					<additionalBuildcommands>
 						<buildcommand>org.eclipse.wst.jsdt.core.javascriptValidator</buildcommand>
-          </additionalBuildcommands>
-          <additionalProjectnatures>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
 						<projectnature>org.eclipse.wst.jsdt.core.jsNature</projectnature>
 					</additionalProjectnatures>
 					<additionalProjectFacets>
