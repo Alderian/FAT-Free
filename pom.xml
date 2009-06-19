@@ -16,7 +16,6 @@
 
 	<!-- Define the sub-components -->
 	<modules>
-		<module>fat-free-model</module>
 		<module>fat-free-core</module>
 		<module>fat-free-webapp</module>
 	</modules>
