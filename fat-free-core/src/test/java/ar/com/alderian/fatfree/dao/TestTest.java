@@ -27,7 +27,7 @@ public class TestTest extends AbstractBaseDaoTest {
 	@org.junit.Test
 	public void count() {
 		log.debug("getting Tests count");
-		int testCount = testDao.count();
+		final int testCount = testDao.count();
 		Assert.assertTrue(testCount > 0);
 	}
 
@@ -35,7 +35,7 @@ public class TestTest extends AbstractBaseDaoTest {
 	@org.junit.Test
 	public void list() {
 		log.debug("getting Tests list");
-		List<Test> tests = testDao.list();
+		final List<Test> tests = testDao.list();
 		Assert.assertTrue(tests.size() > 0);
 	}
 
@@ -43,10 +43,10 @@ public class TestTest extends AbstractBaseDaoTest {
 	@org.junit.Test
 	public void find() {
 		log.debug("Finding a Test");
-		Test aTestToPersist = new Test("aTestToFind");
+		final Test aTestToPersist = new Test("aTestToFind");
 		testDao.persist(aTestToPersist);
 
-		Test aTestToFind = testDao.find(aTestToPersist.getId());
+		final Test aTestToFind = testDao.find(aTestToPersist.getId());
 		Assert.assertNotNull(aTestToFind);
 	}
 
@@ -54,10 +54,10 @@ public class TestTest extends AbstractBaseDaoTest {
 	@org.junit.Test
 	public void persist() {
 		log.debug("Persisting a Test");
-		Test aTestToPersist = new Test("aTestToPersist");
+		final Test aTestToPersist = new Test("aTestToPersist");
 		testDao.persist(aTestToPersist);
 
-		Test aTestTofind = testDao.find(aTestToPersist.getId());
+		final Test aTestTofind = testDao.find(aTestToPersist.getId());
 		Assert.assertNotNull(aTestTofind);
 	}
 
@@ -65,44 +65,44 @@ public class TestTest extends AbstractBaseDaoTest {
 	@org.junit.Test
 	public void update() {
 		final String expected = "Updated";
-		
+
 		log.debug("Persisting a Test");
-		Test aTestToPersist = new Test("aTestToPersist");
+		final Test aTestToPersist = new Test("aTestToPersist");
 		testDao.persist(aTestToPersist);
 
-		Long aTestId = aTestToPersist.getId();
+		final Long aTestId = aTestToPersist.getId();
 
-		Test aTestTofind = testDao.find(aTestId);
+		final Test aTestTofind = testDao.find(aTestId);
 		Assert.assertNotNull(aTestTofind);
 
 		aTestTofind.setName(expected);
 		testDao.update(aTestTofind);
-		
-		Test anotherTestTofind = testDao.find(aTestId);
+
+		final Test anotherTestTofind = testDao.find(aTestId);
 		Assert.assertNotNull(anotherTestTofind);
-		
-		Assert.assertEquals(expected, anotherTestTofind.getName());		
+
+		Assert.assertEquals(expected, anotherTestTofind.getName());
 	}
 
 	@Override
 	@org.junit.Test
 	public void delete() {
 		log.debug("getting Tests count");
-		Test aTestToDelete = new Test("aTestToDelete");
+		final Test aTestToDelete = new Test("aTestToDelete");
 		testDao.persist(aTestToDelete);
 
 		Test aTestTofind = testDao.find(aTestToDelete.getId());
 		Assert.assertNotNull(aTestTofind);
 
-		Long idToFind = aTestTofind.getId();
+		final Long idToFind = aTestTofind.getId();
 		testDao.delete(aTestToDelete);
-		
+
 		try {
 			aTestTofind = testDao.find(idToFind);
 		} catch (NoResultException nre) {
 			aTestTofind = null;
 		}
-		
+
 		Assert.assertNull(aTestTofind);
 
 	}
