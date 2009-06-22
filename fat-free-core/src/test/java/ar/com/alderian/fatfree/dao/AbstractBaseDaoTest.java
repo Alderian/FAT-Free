@@ -6,7 +6,6 @@ package ar.com.alderian.fatfree.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -47,10 +46,4 @@ public abstract class AbstractBaseDaoTest extends
 		Assert.assertTrue(entityManager.isOpen());
 	}
 
-/*
-	@After
-	public void tearDown() {
-		entityManager.close();
-	}
-*/
 }
