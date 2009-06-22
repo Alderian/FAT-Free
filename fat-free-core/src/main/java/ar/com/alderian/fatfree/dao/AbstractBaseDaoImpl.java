@@ -28,7 +28,6 @@ public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
 
 	private static final Log log = LogFactory.getLog(AbstractBaseDaoImpl.class);
 
-	@PersistenceContext(unitName = "entityManager")
 	protected EntityManager entityManager;
 
 	/**
@@ -88,9 +87,7 @@ public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	public List<T> list() {
-		List<T> result;
-
-		// log.debug("Listing object " + t.getClass().getName());
+		final List<T> result;
 
 		result = (List<T>) entityManager.createQuery(this.getQueryFindAll())
 				.getResultList();
@@ -114,10 +111,10 @@ public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
 	 */
 	@SuppressWarnings("unchecked")
 	public T find(final Long id) {
-		T result;
+		final T result;
 
-			result = (T) entityManager.createQuery(getQueryFindById())
-					.setParameter("id", id).getSingleResult();
+		result = (T) entityManager.createQuery(getQueryFindById())
+				.setParameter("id", id).getSingleResult();
 
 		return result;
 	}
@@ -129,14 +126,11 @@ public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
 	 */
 	@Transactional(readOnly = true)
 	public int count() {
-		int result;
-
-		// log.debug("Counting objects " + t.getClass().getName());
+		final int result;
 
 		result = ((Long) entityManager.createQuery(this.getQueryCountAll())
 				.getSingleResult()).intValue();
 
-		// log.debug("Object " + t.getClass().getName() + " count " + result);
 		return result;
 	}
 
@@ -147,6 +141,13 @@ public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
 		return entityManager;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @seear.com.alderian.fatfree.dao.AbstractBaseDao#setEntityManager(javax.
+	 * persistence.EntityManager)
+	 */
+	@PersistenceContext(unitName = "entityManager")
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
