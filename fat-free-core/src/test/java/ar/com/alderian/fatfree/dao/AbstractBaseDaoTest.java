@@ -34,12 +34,16 @@ public abstract class AbstractBaseDaoTest extends
 
 	/* Forceing to test this */
 	public abstract void list();
-	public abstract void persist();
-	public abstract void update();
-	public abstract void delete();
-	public abstract void find();
-	public abstract void count();
 
+	public abstract void persist();
+
+	public abstract void update();
+
+	public abstract void delete();
+
+	public abstract void find();
+
+	public abstract void count();
 
 	@Before
 	public void setUp() {
