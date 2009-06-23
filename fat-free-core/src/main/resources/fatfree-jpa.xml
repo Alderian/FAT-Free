@@ -52,7 +52,7 @@
     <!--
         Instruct Spring to perform declarative transaction management
         automatically on annotated classes.
-    
+ -->   
     <tx:annotation-driven  transaction-manager="transactionManager" />
--->
+
 </beans>
