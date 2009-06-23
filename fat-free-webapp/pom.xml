@@ -111,6 +111,18 @@
                         </execution>
                     </executions>
                 </plugin>
+
+                <!-- Tomcat -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tomcat-maven-plugin</artifactId>
+                    <configuration>
+                        <server>localhost</server>
+                        <path>${fat-free-context-path}</path>
+                        <url>${tomcat-manager-url}</url>
+                    </configuration>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>
