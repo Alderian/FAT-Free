@@ -5,7 +5,6 @@ package ar.com.alderian.fatfree.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.transaction.annotation.Transactional;
 
 import ar.com.alderian.fatfree.entity.Test;
 
@@ -13,7 +12,6 @@ import ar.com.alderian.fatfree.entity.Test;
  * @author oalvarez
  * 
  */
-@Transactional
 public class TestDaoImpl extends AbstractBaseDaoImpl<Test> implements TestDao {
 
 	private static final Log log = LogFactory.getLog(TestDaoImpl.class);
@@ -41,4 +39,5 @@ public class TestDaoImpl extends AbstractBaseDaoImpl<Test> implements TestDao {
 	protected String getQueryFindById() {
 		return "select test from Test test where test.id = :id";
 	}
+
 }
