@@ -9,7 +9,7 @@ import ar.com.alderian.fatfree.entity.Test;
  * @author oalvarez
  * 
  */
-public interface TestService extends AbstractBaseService<Test>{
+public interface TestService extends AbstractBaseService<Test> {
 
 	/**
 	 * @return
