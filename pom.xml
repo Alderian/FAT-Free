@@ -34,6 +34,7 @@
                         <compilerVersion>1.5</compilerVersion>
                     </configuration>
                 </plugin>
+
                 <!-- Eclipse properties -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -64,10 +65,9 @@
                         </additionalBuildcommands>
                     </configuration>
                 </plugin>
-                <!-- Jetty -->
                 <plugin>
                     <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
+                    <artifactId>jetty-maven-plugin</artifactId>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -89,7 +89,6 @@
                 <version>1.1.1</version>
                 <optional>true</optional>
             </dependency>
-
 
             <!-- Spring -->
             <dependency>
