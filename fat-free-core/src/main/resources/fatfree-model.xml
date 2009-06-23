@@ -15,17 +15,4 @@
     <!-- DAO configurations -->
     <bean id="testDao" class="ar.com.alderian.fatfree.dao.TestDaoImpl" />
 
-    <!--
-        <aop:config> <aop:pointcut id="productServiceMethods"
-        expression="execution(* product.ProductService.*(..))"/> <aop:advisor
-        advice-ref="txAdvice" pointcut-ref="productServiceMethods"/>
-        </aop:config> <tx:advice id="txAdvice"
-        transaction-manager="transactionManager"> <tx:attributes> <tx:method
-        name="increasePrice*" propagation="REQUIRED"/> <tx:method
-        name="someOtherBusinessMethod" propagation="REQUIRES_NEW"/> <tx:method
-        name="*" propagation="SUPPORTS" read-only="true"/> </tx:attributes>
-        </tx:advice>
-    -->
-
-
 </beans>
