@@ -3,7 +3,6 @@
  */
 package ar.com.alderian.fatfree.entity;
 
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,21 +16,21 @@ import javax.persistence.Id;
 public class Test extends AbstractBaseEntity {
 
 	/**
-	 * Default Serial version Id
+	 * Default Serial version id
 	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 
-	private String Name;
+	private String name;
 
 	/**
 	 * @return the id
 	 */
 	public Long getId() {
-		return Id;
+		return this.id;
 	}
 
 	/**
@@ -39,14 +38,14 @@ public class Test extends AbstractBaseEntity {
 	 *            the id to set
 	 */
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return Name;
+		return this.name;
 	}
 
 	/**
@@ -54,7 +53,7 @@ public class Test extends AbstractBaseEntity {
 	 *            the name to set
 	 */
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	/**
@@ -64,15 +63,27 @@ public class Test extends AbstractBaseEntity {
 	 *            the name to set
 	 */
 	public Test(String name) {
-		super();
-		Name = name;
+		this.name = name;
 	}
 
-	/**
-	 * Default constructor
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public Test() {
-		super();
+	@Override
+	public boolean equals(Object other) {
+		return ((Test) other).name.equals(this.name);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
 	}
 
 }
