@@ -13,6 +13,10 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 /**
  * @author oalvarez
  * 
+ *         Base Service Test to implement basic functionality
+ * 
+ *         Context is configured using fatfree-model.xml
+ * 
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/fatfree-model.xml" })
