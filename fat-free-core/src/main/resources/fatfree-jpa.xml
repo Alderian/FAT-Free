@@ -45,14 +45,14 @@
     -->
     <bean id="persistenceExceptionTranslationPostProcessor"
         class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-        
+
     <bean id="persistenceAnnotationBeanPostProcessor"
         class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
     <!--
         Instruct Spring to perform declarative transaction management
         automatically on annotated classes.
- -->   
-    <tx:annotation-driven  transaction-manager="transactionManager" />
+    -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
 </beans>
