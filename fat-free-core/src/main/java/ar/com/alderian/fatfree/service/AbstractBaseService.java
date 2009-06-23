@@ -5,11 +5,13 @@ package ar.com.alderian.fatfree.service;
 
 import java.util.List;
 
+import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
+
 /**
  * @author oalvarez
  * 
  */
-public interface AbstractBaseService<T> {
+public interface AbstractBaseService<T extends AbstractBaseEntity> {
 
 	/**
 	 * Persist Object

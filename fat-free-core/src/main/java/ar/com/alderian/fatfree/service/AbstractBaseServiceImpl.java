@@ -6,17 +6,21 @@ package ar.com.alderian.fatfree.service;
 import java.util.List;
 
 import ar.com.alderian.fatfree.dao.AbstractBaseDao;
+import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
 
 /**
  * @author oalvarez
- *
+ * 
  * @param <T>
  */
-public abstract class AbstractBaseServiceImpl<T> implements AbstractBaseService<T>{
-	
+public abstract class AbstractBaseServiceImpl<T extends AbstractBaseEntity>
+		implements AbstractBaseService<T> {
+
 	private AbstractBaseDao<T> baseDao;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ar.com.alderian.fatfree.service.AbstractBaseService#count()
 	 */
 	public int count() {
@@ -27,33 +31,46 @@ public abstract class AbstractBaseServiceImpl<T> implements AbstractBaseService<
 		baseDao.persist(t);
 	}
 
-	/* (non-Javadoc)
-	 * @see ar.com.alderian.fatfree.service.AbstractBaseService#delete(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ar.com.alderian.fatfree.service.AbstractBaseService#delete(java.lang.
+	 * Object)
 	 */
 	public void delete(T t) {
 		baseDao.delete(t);
 	}
 
-	/* (non-Javadoc)
-	 * @see ar.com.alderian.fatfree.service.AbstractBaseService#find(java.lang.Long)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ar.com.alderian.fatfree.service.AbstractBaseService#find(java.lang.Long)
 	 */
 	public T find(Long id) {
 		return baseDao.find(id);
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see ar.com.alderian.fatfree.service.AbstractBaseService#list()
 	 */
 	public List<T> list() {
 		return baseDao.list();
 	}
 
-	/* (non-Javadoc)
-	 * @see ar.com.alderian.fatfree.service.AbstractBaseService#update(java.lang.Object)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * ar.com.alderian.fatfree.service.AbstractBaseService#update(java.lang.
+	 * Object)
 	 */
 	public void update(T t) {
 		baseDao.update(t);
-		
+
 	}
 
 	/**
@@ -64,7 +81,8 @@ public abstract class AbstractBaseServiceImpl<T> implements AbstractBaseService<
 	}
 
 	/**
-	 * @param baseDao the baseDao to set
+	 * @param baseDao
+	 *            the baseDao to set
 	 */
 	public void setBaseDao(AbstractBaseDao<T> baseDao) {
 		this.baseDao = baseDao;
