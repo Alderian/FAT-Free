@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-public interface AbstractBaseDao<T> {
+import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
+
+public interface AbstractBaseDao<T extends AbstractBaseEntity> {
 
 	public void setEntityManager(EntityManager entityManager);
+
 	public void populateDatabase();
-	
+
 	/**
 	 * Persist Object
 	 * 
@@ -41,7 +44,7 @@ public interface AbstractBaseDao<T> {
 	 * @return List of all instance of Object
 	 */
 	public List<T> list();
-	
+
 	/**
 	 * Find an instance of an Object by Object Id
 	 * 
@@ -51,12 +54,12 @@ public interface AbstractBaseDao<T> {
 	 * @return The Object
 	 */
 	public T find(final Long id);
-	
+
 	/**
 	 * Counts every instance of Object
 	 * 
 	 * @return the count of instances of object
 	 */
 	public int count();
-	
+
 }

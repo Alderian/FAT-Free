@@ -25,6 +25,13 @@ public abstract class AbstractBaseEntity implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
+	protected AbstractBaseEntity() {
+		// You cannot use the empty constructor
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

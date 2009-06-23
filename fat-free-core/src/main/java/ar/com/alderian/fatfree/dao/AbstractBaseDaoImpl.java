@@ -13,18 +13,21 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
+
 /**
  * @author oalvarez
  * 
  *         Base DAO to implement basic functionality
  * 
+ *         PersistenceExceptions will be auto-translated due to @Repository.
+ *         AbstractBaseDaoImpl Will automatically be transactional due to @Transactional
+ *         Any class that extends this Dao is Transactional and Repository
  */
-// PersistenceExceptions will be auto-translated due to @Repository
 @Repository
-// AbstractBaseDaoImpl Will automatically be transactional. Any class that
-// extends this Dao is transactional
 @Transactional
-public abstract class AbstractBaseDaoImpl<T> implements AbstractBaseDao<T> {
+public abstract class AbstractBaseDaoImpl<T extends AbstractBaseEntity>
+		implements AbstractBaseDao<T> {
 
 	private static final Log log = LogFactory.getLog(AbstractBaseDaoImpl.class);
 
