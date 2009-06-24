@@ -14,11 +14,25 @@
     </head>
     <body>
 
+    <comp:outputConnectionStatus style="float:right;" />
+
     <comp:outputText>Just testing ICEFaces Configurtation:</comp:outputText>
     <br />
     <comp:outputLabel value="#{testCtrl.label}" />
     <br />
     <comp:outputLabel value="#{testCtrl.value}" />
+
+    <!-- Datagrid -->
+
+    <h:form>
+        <br />
+        Time: <comp:outputText value="#{timebean.now}" />
+        <br />
+        Refresh Count: <comp:outputText value="#{timebean.refreshCount}" />
+        <br />
+        <comp:commandLink value="Click here to increment refresh value"
+            action="#{timebean.refresh}" />
+    </h:form>
 
     </body>
     </html>

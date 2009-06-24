@@ -13,7 +13,7 @@
 
    <!-- Determines how URLs are resolved to controllers -->
     <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-      <property name="mappings">
+      <!-- property name="mappings">
          <map>
             <entry key="/login/**" value-ref="loginHandler"/>
             <entry key="/accessDenied/**" value-ref="accessDeniedHandler"/>
@@ -29,7 +29,7 @@
             <entry key="/timesheets/deletePeriod/**" value-ref="periodDeleteController"/>            
             <entry key="/timesheets/**" value-ref="timesheetListController"/>
          </map>
-      </property>
+      </property -->
       <property name="alwaysUseFullPath" value="true"/>
       <property name="defaultHandler" ref="defaultHandler"/>
     </bean>
@@ -38,7 +38,7 @@
       <property name="exceptionMappings">
          <props>
             <prop key="java.lang.Exception">errors/error</prop>
-            <prop key="com.apress.timesheets.TimesheetSecurityException">errors/access</prop>            
+            <!-- prop key="com.apress.timesheets.TimesheetSecurityException">errors/access</prop -->            
          </props>
       </property>
       <property name="defaultErrorView" value="errors/error"/>
@@ -48,9 +48,10 @@
       <property name="basename" value="messages"/>
    </bean>
   
-   <!-- Bring in the WebFlow configuration -->
+   <!-- Bring in the WebFlow configuration
    <import resource="classpath:timesheet-webflow.xml"/>
-
+ -->
+ 
    <!-- Simple controllers -->
    <bean id="defaultHandler" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
       <property name="viewName" value="home"/>
@@ -63,8 +64,17 @@
    <bean id="accessDeniedHandler" class="org.springframework.web.servlet.mvc.ParameterizableViewController">
       <property name="viewName" value="accessDenied"/>
    </bean>
+   
+    <!-- Backin Beans configuration -->
+    <bean id="testCtrl" class="ar.com.alderian.fatfree.web.controller.TestController">
+        <property name="testService" ref="testService" />
+    </bean>
 
-   <!-- Custom controllers -->
+    <bean id="timebean" class="ar.com.alderian.fatfree.web.bean.TimeBean"
+        lazy-init="true" scope="session" />
+   
+
+   <!-- Custom controllers
    <bean id="adminUserListController" class="com.apress.timesheets.mvc.UserListController">
       <property name="commandClass" value="com.apress.timesheets.mvc.UserListForm"/>
       <property name="commandName" value="userListForm"/>
@@ -154,7 +164,7 @@
       <property name="cancelParamKey" value="cancel"/>
       <property name="timesheetService" ref="timesheetService"/>
    </bean>
-
+ -->
 
 
 </beans>
