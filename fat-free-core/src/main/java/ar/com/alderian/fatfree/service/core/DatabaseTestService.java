@@ -37,17 +37,17 @@ public class DatabaseTestService extends AbstractDatabaseService<Test> implement
 
 	@Override
 	protected String getQueryCountAll() {
-		return "select count(test) from Test test";
+		return "Test.count";
 	}
 
 	@Override
 	protected String getQueryFindAll() {
-		return "select test from Test test";
+		return "Test.findAll";
 	}
 
 	@Override
 	protected String getQueryFindById() {
-		return "select test from Test test where test.id = :id";
+		return "Test.findById";
 	}
 
 }

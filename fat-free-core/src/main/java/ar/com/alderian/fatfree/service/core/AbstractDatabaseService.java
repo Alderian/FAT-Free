@@ -31,7 +31,8 @@ import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
 abstract class AbstractDatabaseService<T extends AbstractBaseEntity> implements
 		DataBaseService<T> {
 
-	private static final Log log = LogFactory.getLog(AbstractDatabaseService.class);
+	private static final Log log = LogFactory
+			.getLog(AbstractDatabaseService.class);
 
 	protected EntityManager entityManager;
 
@@ -105,8 +106,8 @@ abstract class AbstractDatabaseService<T extends AbstractBaseEntity> implements
 	public List<T> list() {
 		final List<T> result;
 
-		result = (List<T>) entityManager.createQuery(this.getQueryFindAll())
-				.getResultList();
+		result = (List<T>) entityManager.createNamedQuery(
+				this.getQueryFindAll()).getResultList();
 
 		log.debug("Result ---> ");
 		if (log.isDebugEnabled()) {
@@ -129,7 +130,7 @@ abstract class AbstractDatabaseService<T extends AbstractBaseEntity> implements
 	public T find(final Long id) {
 		final T result;
 
-		result = (T) entityManager.createQuery(getQueryFindById())
+		result = (T) entityManager.createNamedQuery(this.getQueryFindById())
 				.setParameter("id", id).getSingleResult();
 
 		return result;
@@ -144,8 +145,9 @@ abstract class AbstractDatabaseService<T extends AbstractBaseEntity> implements
 	public int count() {
 		final int result;
 
-		result = ((Long) entityManager.createQuery(this.getQueryCountAll())
-				.getSingleResult()).intValue();
+		result = ((Long) entityManager
+				.createNamedQuery(this.getQueryCountAll()).getSingleResult())
+				.intValue();
 
 		return result;
 	}
