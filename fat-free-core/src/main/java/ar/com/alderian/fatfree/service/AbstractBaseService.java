@@ -19,7 +19,7 @@ public interface AbstractBaseService<T extends AbstractBaseEntity> {
 	 * @param t
 	 *            object to persist
 	 */
-	public void create(final T t);
+	public void persist(final T t);
 
 	/**
 	 * Update Object
