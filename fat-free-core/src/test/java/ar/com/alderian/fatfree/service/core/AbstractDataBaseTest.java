@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ar.com.alderian.fatfree.service;
+package ar.com.alderian.fatfree.service.core;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,7 +30,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @ContextConfiguration(locations = { "classpath:/fatfree-core.xml" })
 @TestExecutionListeners( { DependencyInjectionTestExecutionListener.class })
-public abstract class AbstractBaseServiceTest extends
+abstract class AbstractDataBaseTest extends
 		AbstractTransactionalJUnit4SpringContextTests {
 
 	protected EntityManager entityManager;

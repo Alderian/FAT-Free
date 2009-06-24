@@ -9,7 +9,7 @@
     <import resource="classpath:fatfree-jpa.xml" />
 
     <!--  Services configuration -->
-    <bean id="testService" class="ar.com.alderian.fatfree.service.TestServiceImpl" />
+    <bean id="testService" class="ar.com.alderian.fatfree.service.core.DatabaseTestService" />
 
     <!--
         Activates various annotations to be detected in bean classes: Spring's

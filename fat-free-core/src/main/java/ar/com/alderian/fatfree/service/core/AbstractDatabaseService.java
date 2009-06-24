@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ar.com.alderian.fatfree.service;
+package ar.com.alderian.fatfree.service.core;
 
 import java.util.List;
 
@@ -28,11 +28,10 @@ import ar.com.alderian.fatfree.entity.AbstractBaseEntity;
  */
 @Repository
 @Transactional
-public abstract class AbstractBaseServiceImpl<T extends AbstractBaseEntity>
-		implements AbstractBaseService<T> {
+abstract class AbstractDatabaseService<T extends AbstractBaseEntity> implements
+		DataBaseService<T> {
 
-	private static final Log log = LogFactory
-			.getLog(AbstractBaseServiceImpl.class);
+	private static final Log log = LogFactory.getLog(AbstractDatabaseService.class);
 
 	protected EntityManager entityManager;
 

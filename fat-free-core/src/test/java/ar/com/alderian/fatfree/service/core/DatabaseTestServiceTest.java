@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ar.com.alderian.fatfree.service;
+package ar.com.alderian.fatfree.service.core;
 
 import java.util.List;
 
@@ -14,16 +14,16 @@ import org.junit.Assert;
 import org.junit.Before;
 
 import ar.com.alderian.fatfree.entity.Test;
-import ar.com.alderian.fatfree.service.TestService;
-import ar.com.alderian.fatfree.service.TestServiceImpl;
+import ar.com.alderian.fatfree.service.core.TestService;
+import ar.com.alderian.fatfree.service.core.DatabaseTestService;
 
 /**
  * @author oalvarez
  * 
  */
-public class TestServiceTest extends AbstractBaseServiceTest {
+public class DatabaseTestServiceTest extends AbstractDataBaseTest {
 
-	private static Log log = LogFactory.getLog(TestServiceTest.class);
+	private static Log log = LogFactory.getLog(DatabaseTestServiceTest.class);
 	private TestService databaseTestService;
 
 	@Override
@@ -118,7 +118,7 @@ public class TestServiceTest extends AbstractBaseServiceTest {
 	@PostConstruct
 	public void setUp() {
 		log.debug("setting up Test");
-		TestServiceImpl service = new TestServiceImpl();
+		DatabaseTestService service = new DatabaseTestService();
 
 		service.setEntityManager(entityManager);
 		databaseTestService = service;
@@ -130,7 +130,7 @@ public class TestServiceTest extends AbstractBaseServiceTest {
 		super.setUpDatabase();
 
 		log.debug("setting up Test Database");
-		((TestServiceImpl)databaseTestService).populateDatabase();
+		((DatabaseTestService)databaseTestService).populateDatabase();
 		entityManager.flush();
 	}
 
