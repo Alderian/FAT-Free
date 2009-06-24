@@ -15,5 +15,5 @@ public interface TestService extends AbstractBaseService<Test> {
 	 * @return
 	 */
 	public String getValue();
-
+	
 }

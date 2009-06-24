@@ -3,7 +3,9 @@
  */
 package ar.com.alderian.fatfree.service;
 
-import ar.com.alderian.fatfree.dao.TestDao;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import ar.com.alderian.fatfree.entity.Test;
 
 /**
@@ -12,6 +14,8 @@ import ar.com.alderian.fatfree.entity.Test;
  */
 public class TestServiceImpl extends AbstractBaseServiceImpl<Test> implements
 		TestService {
+
+	private static final Log log = LogFactory.getLog(TestServiceImpl.class);
 
 	/*
 	 * (non-Javadoc)
@@ -22,12 +26,28 @@ public class TestServiceImpl extends AbstractBaseServiceImpl<Test> implements
 		return "Este es un mensaje de prueba";
 	}
 
-	public TestDao getTestDao() {
-		return (TestDao) this.getBaseDao();
+	@Override
+	public void populateDatabase() {
+		if (count() == 0) {
+			log.debug("populating Test");
+			persist(new Test("Standard"));
+			persist(new Test("Overtime"));
+		}
 	}
 
-	public void setTestDao(TestDao testDao) {
-		this.setBaseDao(testDao);
+	@Override
+	protected String getQueryCountAll() {
+		return "select count(test) from Test test";
+	}
+
+	@Override
+	protected String getQueryFindAll() {
+		return "select test from Test test";
+	}
+
+	@Override
+	protected String getQueryFindById() {
+		return "select test from Test test where test.id = :id";
 	}
 
 }

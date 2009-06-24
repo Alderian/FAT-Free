@@ -3,19 +3,19 @@
  */
 package ar.com.alderian.fatfree.service;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.persistence.NoResultException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.junit.Before;
 
-import ar.com.alderian.fatfree.dao.TestDao;
 import ar.com.alderian.fatfree.entity.Test;
+import ar.com.alderian.fatfree.service.TestService;
+import ar.com.alderian.fatfree.service.TestServiceImpl;
 
 /**
  * @author oalvarez
@@ -23,130 +23,115 @@ import ar.com.alderian.fatfree.entity.Test;
  */
 public class TestServiceTest extends AbstractBaseServiceTest {
 
-	private TestService service;
-	private TestDao mockTestDao;
-
-	@Before
-	public void setUp() throws Exception {
-		final TestServiceImpl impl = new TestServiceImpl();
-		mockTestDao = createMock(TestDao.class);
-		impl.setTestDao(mockTestDao);
-		this.service = impl;
-	}
+	private static Log log = LogFactory.getLog(TestServiceTest.class);
+	private TestService databaseTestService;
 
 	@Override
 	@org.junit.Test
 	public void count() {
-		// Prepare test data
-		final String name = "test";
-		final Test test = new Test(name);
-		final List<Test> tests = new ArrayList<Test>();
-		tests.add(test);
-		final int expected = tests.size();
-
-		// Script the test
-		expect(mockTestDao.count()).andReturn(expected);
-		replay(mockTestDao);
-
-		// Run the test
-		final int actual = service.count();
-		verify(mockTestDao);
-		Assert.assertNotNull(actual);
-		Assert.assertEquals(expected, actual);
-	}
-
-	@Override
-	@org.junit.Test
-	public void create() {
-		// Prepare test data
-		final String name = "test";
-		final Test test = new Test(name);
-
-		// Script the test
-		mockTestDao.persist(test);
-		replay(mockTestDao);
-
-		// Run the test
-		service.create(test);
-		verify(mockTestDao);
-	}
-
-	@Override
-	@org.junit.Test
-	public void delete() {
-		// Prepare test data
-		final String name = "test";
-		final Test test = new Test(name);
-
-		// Script the test
-		mockTestDao.delete(test);
-		replay(mockTestDao);
-
-		// Run the test
-		service.delete(test);
-		verify(mockTestDao);
-	}
-
-	@Override
-	@org.junit.Test
-	public void find() {
-		// Prepare test data
-		final String name = "test";
-		final Long id = Long.valueOf(1);
-		final Test test = new Test(name);
-		test.setId(id);
-
-		// Script the mock object's expectations
-		expect(mockTestDao.find(id)).andReturn(test);
-		replay(mockTestDao);
-
-		// Run the test. The mock object will fail the test if its
-		// script is not followed.
-		final Test actualAccount = service.find(id);
-		verify(mockTestDao);
-		Assert.assertTrue(actualAccount == test);
+		log.debug("getting Tests count");
+		final int testCount = databaseTestService.count();
+		Assert.assertTrue(testCount > 0);
 	}
 
 	@Override
 	@org.junit.Test
 	public void list() {
-		// Prepare test data
-		final String name = "test";
-		final Test account = new Test(name);
-		final List<Test> tests = new ArrayList<Test>();
-		tests.add(account);
+		log.debug("getting Tests list");
+		final List<Test> tests = databaseTestService.list();
+		Assert.assertTrue(tests.size() > 0);
+	}
 
-		// Script the test
-		expect(mockTestDao.list()).andReturn(tests);
-		replay(mockTestDao);
+	@Override
+	@org.junit.Test
+	public void find() {
+		log.debug("Finding a Test");
+		final Test aTestToPersist = new Test("aTestToFind");
+		databaseTestService.persist(aTestToPersist);
 
-		// Run the test
-		final List<Test> actual = service.list();
-		verify(mockTestDao);
-		Assert.assertNotNull(actual);
-		Assert.assertEquals(1, actual.size());
-		Assert.assertEquals(account, actual.get(0));
+		final Test aTestToFind = databaseTestService.find(aTestToPersist.getId());
+		Assert.assertNotNull(aTestToFind);
+	}
+
+	@Override
+	@org.junit.Test
+	public void create() {
+		log.debug("Persisting a Test");
+		final Test aTestToPersist = new Test("aTestToPersist");
+		databaseTestService.persist(aTestToPersist);
+
+		final Test aTestTofind = databaseTestService.find(aTestToPersist.getId());
+		Assert.assertNotNull(aTestTofind);
 	}
 
 	@Override
 	@org.junit.Test
 	public void update() {
-		// Prepare test data
-		final String name = "test";
-		final Test test = new Test(name);
-		;
-		// Script the test
-		mockTestDao.update(test);
-		replay(mockTestDao);
+		final String expected = "Updated";
 
-		// Run the test
-		service.update(test);
-		verify(mockTestDao);
+		log.debug("Persisting a Test");
+		final Test aTestToPersist = new Test("aTestToPersist");
+		databaseTestService.persist(aTestToPersist);
+
+		final Long aTestId = aTestToPersist.getId();
+
+		final Test aTestTofind = databaseTestService.find(aTestId);
+		Assert.assertNotNull(aTestTofind);
+
+		aTestTofind.setName(expected);
+		databaseTestService.update(aTestTofind);
+
+		final Test anotherTestTofind = databaseTestService.find(aTestId);
+		Assert.assertNotNull(anotherTestTofind);
+
+		Assert.assertEquals(expected, anotherTestTofind.getName());
+	}
+
+	@Override
+	@org.junit.Test
+	public void delete() {
+		log.debug("getting Tests count");
+		final Test aTestToDelete = new Test("aTestToDelete");
+		databaseTestService.persist(aTestToDelete);
+
+		Test aTestTofind = databaseTestService.find(aTestToDelete.getId());
+		Assert.assertNotNull(aTestTofind);
+
+		final Long idToFind = aTestTofind.getId();
+		databaseTestService.delete(aTestToDelete);
+
+		try {
+			aTestTofind = databaseTestService.find(idToFind);
+		} catch (NoResultException nre) {
+			aTestTofind = null;
+		}
+
+		Assert.assertNull(aTestTofind);
+
 	}
 
 	@org.junit.Test
 	public void getValue() {
-		Assert.assertNotNull(service.getValue());
+		Assert.assertNotNull(databaseTestService.getValue());
+	}
+
+	@PostConstruct
+	public void setUp() {
+		log.debug("setting up Test");
+		TestServiceImpl service = new TestServiceImpl();
+
+		service.setEntityManager(entityManager);
+		databaseTestService = service;
+	}
+
+	@Before
+	@Override
+	public void setUpDatabase() {
+		super.setUpDatabase();
+
+		log.debug("setting up Test Database");
+		((TestServiceImpl)databaseTestService).populateDatabase();
+		entityManager.flush();
 	}
 
 }
