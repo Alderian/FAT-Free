@@ -16,7 +16,6 @@
 
     <!-- Bring in Core Services configuration -->
     <import resource="classpath:fatfree-core.xml" />
-    <import resource="classpath:fatfree-model.xml" />
 
     <!-- Bring in Servlet configuration -->
     <import resource="classpath:fatfree-servlet.xml" />
