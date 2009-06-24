@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-    id="WebApp_ID" version="2.5">
+    xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
 
     <display-name>fat-free</display-name>
 
@@ -20,16 +21,22 @@
         <param-value>server</param-value>
     </context-param>
 
-    <context-param>
-        <param-name>com.icesoft.faces.uploadDirectory</param-name>
-        <param-value>upload</param-value>
-    </context-param>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jsf</url-pattern>
+    </servlet-mapping>
 
-    <context-param>
-        <param-name>com.icesoft.faces.uploadMaxFileSize</param-name>
-        <param-value>4048576</param-value>
-    </context-param>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.jspx</url-pattern>
+    </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.faces</url-pattern>
+    </servlet-mapping>
+
+    <!-- Persistent Faces Servlet Mapping -->
     <servlet>
         <servlet-name>Persistent Faces Servlet</servlet-name>
         <servlet-class>com.icesoft.faces.webapp.xmlhttp.PersistentFacesServlet</servlet-class>
@@ -41,18 +48,6 @@
         <servlet-class>com.icesoft.faces.webapp.xmlhttp.BlockingServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.jspx</url-pattern>
-    </servlet-mapping>
-
-    <!-- Persistent Faces Servlet Mapping -->
 
     <servlet-mapping>
         <servlet-name>Persistent Faces Servlet</servlet-name>
@@ -70,10 +65,11 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>Blocking Servlet</servlet-name>
-        <url-pattern>/block/*</url-pattern>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
 
+    <!-- Upload Servlet Mapping -->
     <servlet>
         <servlet-name>uploadServlet</servlet-name>
         <servlet-class>com.icesoft.faces.component.inputfile.FileUploadServlet</servlet-class>
@@ -85,7 +81,17 @@
         <url-pattern>/uploadHtml</url-pattern>
     </servlet-mapping>
 
-    <!-- Overrides the default context location -->
+    <context-param>
+        <param-name>com.icesoft.faces.uploadDirectory</param-name>
+        <param-value>upload</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>com.icesoft.faces.uploadMaxFileSize</param-name>
+        <param-value>4048576</param-value>
+    </context-param>
+
+    <!-- Overrides the default context location. Using Spring -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
@@ -96,10 +102,16 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
     <!--
-        <listener>The listener "com.icesoft.faces.util.event.servlet.ContextEventRepeater" is
-        already configured for this context.
-        <listener-class>com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
+        The listener "com.icesoft.faces.util.event.servlet.ContextEventRepeater"
+        is already configured for this context. <listener> <listener-class>
+        com.icesoft.faces.util.event.servlet.ContextEventRepeater</listener-class>
         </listener>
     -->
+
 </web-app>
