@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 
 import ar.com.alderian.fatfree.entity.Test;
-import ar.com.alderian.fatfree.service.TestService;
+import ar.com.alderian.fatfree.service.core.TestService;
 
 /**
  * @author oalvarez
