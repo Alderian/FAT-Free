@@ -3,8 +3,6 @@
  */
 package ar.com.alderian.fatfree.entity;
 
-import java.io.Serializable;
-
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -18,15 +16,10 @@ import org.apache.commons.lang.builder.ToStringStyle;
  *         in a clearer way
  * 
  */
-public abstract class AbstractBaseEntity implements Serializable {
+public abstract class AbstractBaseEntity {
 
 	/**
-	 * Default generated SerialVersion
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
+	 * You cannot use the empty constructor
 	 */
 	protected AbstractBaseEntity() {
 		// You cannot use the empty constructor
