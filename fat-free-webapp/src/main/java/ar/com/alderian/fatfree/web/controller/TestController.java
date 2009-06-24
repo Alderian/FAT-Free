@@ -1,7 +1,9 @@
 /**
  * 
  */
-package ar.com.alderian.fatfree.web.beans;
+package ar.com.alderian.fatfree.web.controller;
+
+import org.springframework.stereotype.Controller;
 
 import ar.com.alderian.fatfree.service.TestService;
 
@@ -9,6 +11,7 @@ import ar.com.alderian.fatfree.service.TestService;
  * @author oalvarez
  * 
  */
+@Controller
 public class TestController {
 
 	private TestService testService;
