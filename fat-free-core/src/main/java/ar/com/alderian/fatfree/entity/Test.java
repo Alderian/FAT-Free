@@ -7,12 +7,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author oalvarez
  * 
  */
 @Entity
+@NamedQueries( {
+		@NamedQuery(name = "Test.findAll", query = "select test from Test test"),
+		@NamedQuery(name = "Test.findById", query = "select test from Test test where test.id = :id"),
+		@NamedQuery(name = "Test.count", query = "select count(test) from Test test") })
 public class Test extends AbstractBaseEntity {
 
 	@Id
@@ -80,5 +86,5 @@ public class Test extends AbstractBaseEntity {
 	public int hashCode() {
 		return this.name.hashCode();
 	}
-	
+
 }
