@@ -1,10 +1,131 @@
 Proyecto FAT-Free
+-----------------
 
 Notas de desarrollo
 
 Entorno de desarrollo:
-
 Java 5
-Eclipse 3.4
+Eclipse 3.4 Ganymede JEE
 Tomcat 6
 Maven 2
+
+Plugins para Eclipse
+ICEfaces Eclipse Integration
+SpringSource Tool Suite (STS)
+
+Opcionales
+Maven Integration for Eclipse (m2eclipse)
+    Introducción: http://www.theserverside.com/tt/articles/article.tss?l=Introductiontom2eclipse
+EGit Eclipse Plugin
+
+Versionado en GitHub
+Instalar git
+$ sudo apt-get install git-core git-doc
+
+Configuración de Git
+
+$ git config --global github.user *** GitHub User Account ***
+$ git config --global github.token *** Search at GitHub Account Page ***
+$ git config --global user.name "Your Name"
+$ git config --global user.email "Your email"
+
+Obtener el código del repositorio
+Desde el workspace donde se va a trabajar con el código, correr lo siguiente:
+
+
+$ git clone git://github.com/Alderian/FAT-Free.git
+
+Agregar archivos a ignorar
+$ vi .git/info/exclude
+
+
+.git/info/exclude 
+# git-ls-files --others --exclude-from=.git/info/exclude
+# Lines that start with '#' are comments.
+# For a project mostly in C, the following would be a good set of
+# exclude patterns (uncomment them if you want to use them):
+# *.[oa]
+# *~
+**/target/*
+target/*
+**/bin/*
+**/.classpath
+.classpath
+**/.project
+.project
+**/.settings/
+.settings/
+**/bin/*
+**/.springBeans
+**/*.log  
+Maven
+Se debe configurar algunos valores en el archivo settings.xml. Estos valores son específicos para cada instalación, acá pongo los de uso comun.
+
+Editar el archivo ~/.m2/settings.xml
+
+$ vi ~/.m2/settings.xml
+
+
+~/.m2/settings.xml  
+«?xml version="1.0" encoding="UTF-8"?»
+«settings»
+...
+  «pluginGroups»
+    ...
+    «pluginGroup»org.mortbay.jetty«/pluginGroup»
+    ...
+  «/pluginGroups»
+  ...
+
+  «profiles»
+    ...
+    «!-- user profile --»
+    «profile»
+      «id»user-profile«/id»
+      «activation»
+        «activeByDefault»true«/activeByDefault»
+      «/activation»
+      «properties»
+        «fat-free-context-path»
+          /fat-free-webapp
+        «/fat-free-context-path»
+        «tomcat-manager-url»
+          http://localhost:8080/manager
+        «/tomcat-manager-url»
+      «/properties»
+    «/profile»
+  «/profiles»
+  ...
+  «servers»
+    ...
+    «!-- Remember to add/edit user in Tomcat --»
+    «server»
+      «id»localhost«/id»
+      «username»tomcat«/username»
+      «password»s3cret«/password»
+    «/server»
+  «/servers»
+  ...
+«/settings» 
+Maven y eclipse
+Configuración del workspace
+Para configurar el workspace, y agregar la variable M2_REPO, corremos el siguiente script:
+
+
+$ mvn -Declipse.workspace=«path-to-eclipse-workspace» eclipse:add-maven-repo
+
+Configuración del proyecto para eclipse
+Una vez que se tiene el código fuente, y se ha configurado los archivos a ignorar, se debe correr el siguiente comando para poder importar el proyecto en Eclipse.
+
+En el directorio raíz del proyecto (Fat-Free/), correr
+
+$ mvn eclipse:eclipse
+
+Si instalamos el plugin de Eclipse para integrarnos a Maven, corremos lo siguiente:
+
+$ mvn eclipse:m2eclipse
+
+Luego, ya estamos listos para importar el proyecto en el eclipse y desarrollar.
+
+
+
