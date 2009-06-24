@@ -15,11 +15,6 @@ import javax.persistence.Id;
 @Entity
 public class Test extends AbstractBaseEntity {
 
-	/**
-	 * Default Serial version id
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -85,5 +80,5 @@ public class Test extends AbstractBaseEntity {
 	public int hashCode() {
 		return this.name.hashCode();
 	}
-
+	
 }
