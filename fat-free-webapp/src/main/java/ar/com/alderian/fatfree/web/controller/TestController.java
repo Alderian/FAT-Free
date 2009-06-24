@@ -3,8 +3,12 @@
  */
 package ar.com.alderian.fatfree.web.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 
+import ar.com.alderian.fatfree.entity.Test;
 import ar.com.alderian.fatfree.service.TestService;
 
 /**
@@ -32,6 +36,15 @@ public class TestController {
 
 		return "Esta es el valor: " + testService.getValue();
 
+	}
+
+	/**
+	 * @return
+	 */
+	public List<Test> getlist() {
+		List<Test> list = testService.list();
+		if (list == null) list = new ArrayList<Test>();
+		return list;
 	}
 
 	/**
