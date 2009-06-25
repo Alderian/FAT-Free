@@ -7,16 +7,17 @@
 <%@ taglib prefix="ice" uri="http://www.icesoft.com/icefaces"%>
 <%@ taglib prefix="comp" uri="http://www.icesoft.com/icefaces/component"%>
 <f:view>
+    <comp:loadBundle basename="MessageResources" var="msg" />
     <html>
     <head>
-    <title>Simple ICEFaces Test</title>
+    <title><comp:outputText nospan="true" value="#{msg.test_title}" /></title>
     <comp:outputStyle href="./xmlhttp/css/rime/rime.css" />
     </head>
     <body>
 
     <comp:outputConnectionStatus style="float:right; clear:none;" />
 
-    <comp:outputText>Just testing ICEFaces Configuration:</comp:outputText>
+    <comp:outputText value="#{msg.test_message}" />
     <br />
     <comp:outputLabel value="#{testCtrl.label}" />
     <br />
@@ -27,13 +28,13 @@
         <comp:dataTable value="#{testCtrl.list}" var="item" id="testList">
             <h:column>
                 <f:facet name="header">
-                    <comp:outputText value="id #" />
+                    <comp:outputText value="#{msg.test_table_column_id}" />
                 </f:facet>
                 <comp:outputText value="#{item.id}" />
             </h:column>
             <h:column>
                 <f:facet name="header">
-                    <comp:outputText value="name" />
+                    <comp:outputText value="#{msg.test_table_column_name}" />
                 </f:facet>
                 <comp:outputText value="#{item.name}" />
             </h:column>
@@ -45,7 +46,7 @@
             firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
             pageCountVar="pageCount" pageIndexVar="pageIndex">
             <comp:outputFormat styleClass="standard"
-                value="{0} tests found, displaying {1} test(s), from {2} to {3}. Page {4} / {5}.">
+                value="#{msg.test_table_paginator_message}">
                 <f:param value="#{rowsCount}" />
                 <f:param value="#{displayedRowsCount}" />
                 <f:param value="#{firstRowIndex}" />
@@ -60,32 +61,32 @@
             fastStep="3" paginatorMaxPages="4">
             <f:facet name="first">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-first.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-first.gif"
                     style="border:none;" title="First Page" />
             </f:facet>
             <f:facet name="last">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-last.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-last.gif"
                     style="border:none;" title="Last Page" />
             </f:facet>
             <f:facet name="previous">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-previous.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-previous.gif"
                     style="border:none;" title="Previous Page" />
             </f:facet>
             <f:facet name="next">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-next.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-next.gif"
                     style="border:none;" title="Next Page" />
             </f:facet>
             <f:facet name="fastforward">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-ff.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-ff.gif"
                     style="border:none;" title="Fast Forward" />
             </f:facet>
             <f:facet name="fastrewind">
                 <comp:graphicImage
-                    url="./xmlhttp/css/xp/css-images/arrow-fr.gif"
+                    url="./xmlhttp/css/rime/css-images/arrow-fr.gif"
                     style="border:none;" title="Fast Backwards" />
             </f:facet>
         </comp:dataPaginator>
@@ -94,11 +95,12 @@
     <br />
 
     <h:form id="timeBean">
-        Time: <comp:outputText value="#{timebean.now}" />
+        <comp:outputText value="#{msg.test_time_time} #{timebean.refreshCount}" />
         <br />
-        Refresh Count: <comp:outputText value="#{timebean.refreshCount}" />
+        <comp:outputText
+            value="#{msg.test_time_refresh_count} #{timebean.refreshCount}" />
         <br />
-        <comp:commandLink value="Click here to increment refresh value"
+        <comp:commandLink value="#{msg.test_time_refresh_link}"
             action="#{timebean.refresh}" />
     </h:form>
 
