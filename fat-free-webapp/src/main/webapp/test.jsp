@@ -20,41 +20,9 @@
     <comp:outputText value="#{msg.test_message}" />
     <br />
     <comp:outputLabel value="#{testCtrl.label}" />
-    <br />
-    <comp:outputLabel value="#{testCtrl.value}" />
+    <comp:outputText value="#{testCtrl.value}" />
 
-    <h:form id="dataTable">
-
-        <comp:dataTable value="#{testCtrl.list}" var="item" id="testList">
-            <h:column>
-                <f:facet name="header">
-                    <comp:outputText value="#{msg.test_table_column_id}" />
-                </f:facet>
-                <comp:outputText value="#{item.id}" />
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    <comp:outputText value="#{msg.test_table_column_name}" />
-                </f:facet>
-                <comp:outputText value="#{item.name}" />
-            </h:column>
-        </comp:dataTable>
-
-        <!-- Display counts about the table and the currently displayed page -->
-        <comp:dataPaginator id="dataScroll_2" for="testList"
-            rowsCountVar="rowsCount" displayedRowsCountVar="displayedRowsCount"
-            firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
-            pageCountVar="pageCount" pageIndexVar="pageIndex">
-            <comp:outputFormat styleClass="standard"
-                value="#{msg.test_table_paginator_message}">
-                <f:param value="#{rowsCount}" />
-                <f:param value="#{displayedRowsCount}" />
-                <f:param value="#{firstRowIndex}" />
-                <f:param value="#{lastRowIndex}" />
-                <f:param value="#{pageIndex}" />
-                <f:param value="#{pageCount}" />
-            </comp:outputFormat>
-        </comp:dataPaginator>
+    <comp:form partialSubmit="true">
 
         <!-- Paginator with page controls -->
         <comp:dataPaginator id="dataScroll_3" for="testList" paginator="true"
@@ -90,19 +58,47 @@
                     style="border:none;" title="Fast Backwards" />
             </f:facet>
         </comp:dataPaginator>
-    </h:form>
 
-    <br />
+        <comp:dataTable value="#{testCtrl.list}" var="item" id="testList"
+            cellspacing="1" rowClasses="evenRow,oddRow">
+            <comp:column>
+                <f:facet name="header">
+                    <comp:outputText value="#{msg.test_table_column_id}" />
+                </f:facet>
+                <comp:outputText value="#{item.id}" />
+            </comp:column>
+            <comp:column>
+                <f:facet name="header">
+                    <comp:outputText value="#{msg.test_table_column_name}" />
+                </f:facet>
+                <comp:outputText value="#{item.name}" />
+            </comp:column>
+        </comp:dataTable>
 
-    <h:form id="timeBean">
-        <comp:outputText value="#{msg.test_time_time} #{timebean.refreshCount}" />
+        <!-- Display counts about the table and the currently displayed page -->
+        <comp:dataPaginator id="dataScroll_2" for="testList"
+            rowsCountVar="rowsCount" displayedRowsCountVar="displayedRowsCount"
+            firstRowIndexVar="firstRowIndex" lastRowIndexVar="lastRowIndex"
+            pageCountVar="pageCount" pageIndexVar="pageIndex">
+            <comp:outputFormat styleClass="standard"
+                value="#{msg.test_table_paginator_message}">
+                <f:param value="#{rowsCount}" />
+                <f:param value="#{displayedRowsCount}" />
+                <f:param value="#{firstRowIndex}" />
+                <f:param value="#{lastRowIndex}" />
+                <f:param value="#{pageIndex}" />
+                <f:param value="#{pageCount}" />
+            </comp:outputFormat>
+        </comp:dataPaginator>
+        <br />
+        <comp:outputText value="#{msg.test_time_time} #{timebean.now}" />
         <br />
         <comp:outputText
             value="#{msg.test_time_refresh_count} #{timebean.refreshCount}" />
         <br />
         <comp:commandLink value="#{msg.test_time_refresh_link}"
             action="#{timebean.refresh}" />
-    </h:form>
+    </comp:form>
 
     </body>
     </html>
